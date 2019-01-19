@@ -1,7 +1,22 @@
 import { S3, DynamoDB } from "aws-sdk";
-
+import fs from "fs";
 const ddb = new DynamoDB({});
 const s3 = new S3({});
+
+const printPackages = async () => {
+  const paths = [`${process.env.LAMBDA_RUNTIME_DIR}/node_modules`];
+  let packages = [];
+  paths.forEach(p => {
+    try {
+      const thisResults = fs.readdirSync(p);
+      packages = [...packages, ...thisResults];
+    } catch (error) {
+      console.log(`FAILED TO READ: ${p}`, error);
+    }
+  });
+  // console.log(JSON.stringify(packages));
+  return JSON.stringify(packages);
+};
 const getBundle = async (event, context) => {
   console.log("hello there");
   return { body: JSON.stringify(event) };
@@ -21,4 +36,4 @@ const listBundles = async (event, context) => {
     throw e;
   }
 };
-export { getBundle, addBundle, listBundles };
+export { getBundle, addBundle, listBundles, printPackages };

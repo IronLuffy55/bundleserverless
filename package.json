@@ -20,6 +20,7 @@
     "aws-sdk": "^2.381.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-source-map-support": "^2.0.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "serverless": "^1.35.1",
     "serverless-appsync-plugin": "^1.0.9",
     "serverless-offline": "^3.31.3",
