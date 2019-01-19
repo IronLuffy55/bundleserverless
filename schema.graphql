@@ -1,0 +1,16 @@
+type BundleInfo {
+  downloadUrl: String
+  ttl: Float
+}
+type Query {
+  getBundle(
+    version: String
+    platform: String
+    hash: String
+    info: String
+  ): BundleInfo
+  getBundles: [BundleInfo]
+}
+schema {
+  query: Query
+}
